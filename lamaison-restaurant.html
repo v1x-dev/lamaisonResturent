@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LaMaison — Premium Restaurant</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Poppins',sans-serif;background:#0d1f1a;color:#e8dcc8;overflow-x:hidden}
+:root{--gold:#c9a84c;--gold-light:#e2c47a;--dark:#0d1f1a;--dark2:#122319;--dark3:#0a1a15;--cream:#e8dcc8;--text-muted:#8a9e8f}
+
+/* NAV */
+nav{position:fixed;top:0;width:100%;z-index:100;padding:1.2rem 4rem;display:flex;align-items:center;justify-content:space-between;background:rgba(13,31,26,0.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(201,168,76,0.15)}
+.nav-logo{font-size:1.5rem;font-weight:700;color:var(--gold);letter-spacing:3px;text-transform:uppercase}
+.nav-logo span{color:var(--cream);font-weight:300}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{color:var(--text-muted);text-decoration:none;font-size:0.78rem;letter-spacing:2px;text-transform:uppercase;transition:color 0.3s}
+.nav-links a:hover{color:var(--gold)}
+.nav-btn{background:transparent;border:1px solid var(--gold);color:var(--gold);padding:0.55rem 1.4rem;font-family:'Poppins',sans-serif;font-size:0.7rem;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all 0.3s}
+.nav-btn:hover{background:var(--gold);color:#0d1f1a}
+
+/* HERO */
+.hero{height:100vh;position:relative;display:flex;align-items:center;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:linear-gradient(135deg,rgba(13,31,26,0.95) 45%,rgba(13,31,26,0.6) 100%)}
+.hero-img-el{position:absolute;right:0;top:0;width:55%;height:100%;object-fit:cover;filter:brightness(0.35) saturate(0.8)}
+.hero-content{position:relative;z-index:2;padding:0 4rem;max-width:700px}
+.hero-tag{font-size:0.7rem;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem}
+.hero-title{font-size:clamp(2.8rem,5vw,4.5rem);font-weight:700;line-height:1.1;margin-bottom:1rem;color:var(--cream)}
+.hero-title em{color:var(--gold);font-style:italic;font-weight:300}
+.hero-sub{font-size:1rem;font-weight:300;color:var(--text-muted);line-height:1.8;max-width:420px;margin-bottom:2.5rem}
+.hero-actions{display:flex;gap:1.2rem;align-items:center}
+.btn-primary{background:var(--gold);color:#0d1f1a;border:none;padding:0.9rem 2.2rem;font-family:'Poppins',sans-serif;font-size:0.75rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all 0.3s}
+.btn-primary:hover{background:var(--gold-light)}
+.btn-outline{background:transparent;color:var(--cream);border:1px solid rgba(232,220,200,0.4);padding:0.9rem 2.2rem;font-family:'Poppins',sans-serif;font-size:0.75rem;font-weight:400;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all 0.3s}
+.btn-outline:hover{border-color:var(--cream)}
+.hero-scroll{position:absolute;bottom:2.5rem;left:4rem;display:flex;align-items:center;gap:0.8rem;color:var(--text-muted);font-size:0.65rem;letter-spacing:3px;text-transform:uppercase}
+.scroll-line{width:50px;height:1px;background:var(--gold);opacity:0.5}
+.hero-stats{position:absolute;bottom:2.5rem;right:4rem;display:flex;gap:3rem}
+.stat{text-align:center}
+.stat-num{font-size:1.8rem;font-weight:700;color:var(--gold);display:block;line-height:1}
+.stat-label{font-size:0.6rem;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);margin-top:0.3rem;display:block}
+
+/* STORY */
+.section{padding:7rem 4rem}
+.story{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.story-img-wrap{position:relative}
+.story-img{width:100%;height:500px;object-fit:cover;filter:brightness(0.8) saturate(0.9)}
+.story-accent{position:absolute;bottom:-1.5rem;right:-1.5rem;width:200px;height:200px;border:1px solid rgba(201,168,76,0.3);z-index:-1}
+.story-badge{position:absolute;top:2rem;left:-2rem;background:var(--dark2);border:1px solid rgba(201,168,76,0.3);padding:1.2rem;text-align:center;min-width:100px}
+.badge-num{font-size:2rem;font-weight:700;color:var(--gold);display:block}
+.badge-text{font-size:0.6rem;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted)}
+.section-tag{font-size:0.65rem;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:1rem}
+.section-title{font-size:clamp(2rem,3vw,3rem);font-weight:700;line-height:1.2;color:var(--cream);margin-bottom:1.5rem}
+.section-title em{font-style:italic;font-weight:300;color:var(--gold)}
+.section-body{font-size:0.9rem;font-weight:300;line-height:1.9;color:var(--text-muted);margin-bottom:2rem}
+.divider{width:50px;height:2px;background:var(--gold);margin-bottom:2rem}
+
+/* MENU FEATURE */
+.menu-feature{background:var(--dark2);padding:7rem 4rem}
+.menu-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:4rem}
+.menu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.menu-card{position:relative;overflow:hidden;cursor:pointer;background:var(--dark3)}
+.menu-card img{width:100%;height:320px;object-fit:cover;transition:transform 0.6s;filter:brightness(0.6) saturate(0.8)}
+.menu-card:hover img{transform:scale(1.05)}
+.menu-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(13,31,26,0.92) 35%,transparent 70%);padding:1.5rem}
+.menu-overlay-content{position:absolute;bottom:1.5rem;left:1.5rem;right:1.5rem}
+.menu-cat{font-size:0.6rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:0.4rem}
+.menu-name{font-size:1.15rem;font-weight:600;color:var(--cream);display:block;margin-bottom:0.3rem}
+.menu-desc{font-size:0.75rem;font-weight:300;color:var(--text-muted);display:block;margin-bottom:0.8rem}
+.menu-price{font-size:1rem;font-weight:600;color:var(--gold)}
+
+/* SPECIAL */
+.special{display:grid;grid-template-columns:1fr 1fr;gap:0;min-height:600px}
+.special-content{background:var(--dark3);padding:6rem 5rem;display:flex;flex-direction:column;justify-content:center}
+.special-img{position:relative;overflow:hidden}
+.special-img img{width:100%;height:100%;object-fit:cover;filter:brightness(0.7) saturate(0.8)}
+.special-img-overlay{position:absolute;inset:0;background:rgba(13,31,26,0.3)}
+.features{margin-top:2.5rem;display:flex;flex-direction:column;gap:1.2rem}
+.feature-item{display:flex;gap:1rem;align-items:flex-start}
+.feature-icon{width:36px;height:36px;border:1px solid rgba(201,168,76,0.4);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.feature-icon svg{width:16px;height:16px;fill:var(--gold)}
+.feature-text h4{font-size:0.85rem;font-weight:600;color:var(--cream);margin-bottom:0.2rem}
+.feature-text p{font-size:0.78rem;font-weight:300;color:var(--text-muted);line-height:1.6}
+
+/* TESTIMONIALS */
+.testimonials{background:var(--dark2);padding:7rem 4rem;text-align:center}
+.test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:4rem}
+.test-card{background:var(--dark3);border:1px solid rgba(201,168,76,0.12);padding:2.5rem 2rem;position:relative}
+.test-card::before{content:'';position:absolute;top:0;left:2rem;width:30px;height:2px;background:var(--gold)}
+.test-stars{color:var(--gold);font-size:0.7rem;letter-spacing:3px;margin-bottom:1.2rem}
+.test-quote{font-size:0.85rem;font-weight:300;font-style:italic;line-height:1.8;color:var(--text-muted);margin-bottom:1.5rem}
+.test-author{font-size:0.75rem;font-weight:600;color:var(--cream);letter-spacing:1px}
+.test-date{font-size:0.65rem;color:var(--text-muted);margin-top:0.2rem}
+
+/* RESERVE */
+.reserve{padding:7rem 4rem;display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center}
+.reserve-form{display:flex;flex-direction:column;gap:1.2rem}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.form-group{display:flex;flex-direction:column;gap:0.5rem}
+.form-group label{font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted)}
+.form-group input,.form-group select{background:transparent;border:none;border-bottom:1px solid rgba(201,168,76,0.25);color:var(--cream);font-family:'Poppins',sans-serif;font-size:0.85rem;padding:0.7rem 0;outline:none;transition:border-color 0.3s}
+.form-group input:focus,.form-group select:focus{border-bottom-color:var(--gold)}
+.form-group select option{background:#0d1f1a;color:#e8dcc8}
+.form-group input::placeholder{color:rgba(138,158,143,0.4);font-size:0.8rem}
+
+/* GALLERY */
+.gallery{background:var(--dark3);padding:7rem 4rem}
+.gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:auto auto;gap:2px;margin-top:3.5rem}
+.gallery-item{overflow:hidden;position:relative}
+.gallery-item img{width:100%;height:220px;object-fit:cover;filter:brightness(0.65) saturate(0.7);transition:all 0.5s}
+.gallery-item:hover img{filter:brightness(0.85) saturate(1);transform:scale(1.03)}
+.gallery-item.tall{grid-row:span 2}
+.gallery-item.tall img{height:444px}
+
+/* FOOTER */
+footer{background:#080f0d;padding:4rem 4rem 2rem;border-top:1px solid rgba(201,168,76,0.12)}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem}
+.footer-brand .nav-logo{font-size:1.3rem;margin-bottom:1rem;display:block}
+.footer-brand p{font-size:0.8rem;font-weight:300;line-height:1.8;color:var(--text-muted);max-width:250px}
+.footer-col h4{font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem}
+.footer-col ul{list-style:none}
+.footer-col ul li{margin-bottom:0.7rem}
+.footer-col ul li a{color:var(--text-muted);text-decoration:none;font-size:0.8rem;font-weight:300;transition:color 0.3s}
+.footer-col ul li a:hover{color:var(--cream)}
+.footer-bottom{border-top:1px solid rgba(201,168,76,0.08);padding-top:1.5rem;display:flex;justify-content:space-between;align-items:center}
+.footer-bottom p{font-size:0.7rem;color:var(--text-muted)}
+.centered{text-align:center}
+.centered .divider{margin:0 auto}
+.hours-strip{background:var(--gold);padding:1rem 4rem;display:flex;justify-content:center;gap:4rem}
+.hour-item{display:flex;gap:1rem;align-items:center}
+.hour-item span:first-child{font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;color:#0d1f1a;font-weight:600}
+.hour-item span:last-child{font-size:0.8rem;color:rgba(13,31,26,0.7);font-weight:400}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">La<span>Maison</span></div>
+  <ul class="nav-links">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Menu</a></li>
+    <li><a href="#">About</a></li>
+    <li><a href="#">Gallery</a></li>
+    <li><a href="#">Events</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+  <button class="nav-btn">Reserve a Table</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1600&q=80&fit=crop" class="hero-img-el" alt="Restaurant interior">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Your Special Occasion Destination</div>
+    <h1 class="hero-title">Where Every Bite<br>Tells a <em>Story</em></h1>
+    <p class="hero-sub">A premium culinary experience crafted to be savored — where tradition meets innovation and every dish is a celebration of flavor.</p>
+    <div class="hero-actions">
+      <button class="btn-primary">Explore Our Menu</button>
+      <button class="btn-outline">Our Story</button>
+    </div>
+  </div>
+  <div class="hero-scroll"><div class="scroll-line"></div>Scroll to discover</div>
+  <div class="hero-stats">
+    <div class="stat"><span class="stat-num">12+</span><span class="stat-label">Years of Excellence</span></div>
+    <div class="stat"><span class="stat-num">48</span><span class="stat-label">Signature Dishes</span></div>
+    <div class="stat"><span class="stat-num">5★</span><span class="stat-label">Guest Rating</span></div>
+  </div>
+</section>
+
+<!-- HOURS STRIP -->
+<div class="hours-strip">
+  <div class="hour-item"><span>Mon – Thu</span><span>12:00 PM – 10:00 PM</span></div>
+  <div class="hour-item"><span>Fri – Sat</span><span>12:00 PM – 12:00 AM</span></div>
+  <div class="hour-item"><span>Sunday</span><span>11:00 AM – 9:00 PM</span></div>
+</div>
+
+<!-- STORY SECTION -->
+<section class="section">
+  <div class="story">
+    <div class="story-img-wrap">
+      <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&q=80&fit=crop" class="story-img" alt="Restaurant ambiance">
+      <div class="story-accent"></div>
+      <div class="story-badge"><span class="badge-num">12</span><span class="badge-text">Years of craft</span></div>
+    </div>
+    <div>
+      <div class="section-tag">Our Philosophy</div>
+      <h2 class="section-title">A Taste That<br><em>Lingers</em> Long After</h2>
+      <div class="divider"></div>
+      <p class="section-body">LaMaison is a premium culinary destination where each plate is a canvas and each ingredient is chosen with intention. We source the finest seasonal produce, partner with local farmers, and bring decades of craftsmanship to every meal.</p>
+      <p class="section-body">Whether you're celebrating a milestone, hosting a business dinner, or simply indulging yourself — we promise an experience that engages all your senses.</p>
+      <button class="btn-primary">Discover Our Story</button>
+    </div>
+  </div>
+</section>
+
+<!-- MENU FEATURE -->
+<div class="menu-feature">
+  <div class="menu-header">
+    <div>
+      <div class="section-tag">Curated Selection</div>
+      <h2 class="section-title" style="margin-bottom:0">Our Signature <em>Dishes</em></h2>
+    </div>
+    <button class="btn-outline">View Full Menu</button>
+  </div>
+  <div class="menu-grid">
+    <div class="menu-card">
+      <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&q=80&fit=crop" alt="Truffle Risotto">
+      <div class="menu-overlay">
+        <div class="menu-overlay-content">
+          <span class="menu-cat">Chef's Special</span>
+          <span class="menu-name">Truffle Risotto</span>
+          <span class="menu-desc">Arborio rice, black truffle, aged parmesan, wild herbs</span>
+          <span class="menu-price">₹1,850</span>
+        </div>
+      </div>
+    </div>
+    <div class="menu-card">
+      <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&q=80&fit=crop" alt="Prime Tenderloin">
+      <div class="menu-overlay">
+        <div class="menu-overlay-content">
+          <span class="menu-cat">Signature Grill</span>
+          <span class="menu-name">Prime Tenderloin</span>
+          <span class="menu-desc">Dry-aged 45 days, chimichurri, roasted bone marrow</span>
+          <span class="menu-price">₹3,200</span>
+        </div>
+      </div>
+    </div>
+    <div class="menu-card">
+      <img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=600&q=80&fit=crop" alt="Chocolate Soufflé">
+      <div class="menu-overlay">
+        <div class="menu-overlay-content">
+          <span class="menu-cat">Sweet Finale</span>
+          <span class="menu-name">Dark Chocolate Soufflé</span>
+          <span class="menu-desc">72% Valrhona, vanilla bean crème anglaise</span>
+          <span class="menu-price">₹680</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SPECIAL EXPERIENCE -->
+<div class="special">
+  <div class="special-content">
+    <div class="section-tag">The Experience</div>
+    <h2 class="section-title">More Than a Meal —<br>A <em>Moment</em> to Remember</h2>
+    <div class="divider"></div>
+    <p class="section-body" style="margin-bottom:0">We curate every element of your evening — from the lighting to the last bite — to ensure an experience that feels entirely personal.</p>
+    <div class="features">
+      <div class="feature-item">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        </div>
+        <div class="feature-text">
+          <h4>Private Dining Rooms</h4>
+          <p>Intimate spaces for 6–40 guests, fully customizable for your event</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.85 7h10.29l1.08 3.11H5.77L6.85 7zM19 17H5v-5h14v5z"/></svg>
+        </div>
+        <div class="feature-text">
+          <h4>Bespoke Event Catering</h4>
+          <p>Tailored menus for weddings, corporate dinners, and celebrations</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/></svg>
+        </div>
+        <div class="feature-text">
+          <h4>Sommelier on Call</h4>
+          <p>Expert wine and cocktail pairing recommendations for every course</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="special-img">
+    <img src="https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?w=800&q=80&fit=crop" alt="Dining experience">
+    <div class="special-img-overlay"></div>
+  </div>
+</div>
+
+<!-- GALLERY -->
+<div class="gallery">
+  <div class="centered">
+    <div class="section-tag" style="display:inline-block">Visual Journey</div>
+    <h2 class="section-title">A Feast for the <em>Eyes</em></h2>
+    <div class="divider" style="margin:0 auto 0"></div>
+  </div>
+  <div class="gallery-grid">
+    <div class="gallery-item tall">
+      <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600&q=80&fit=crop" alt="Gallery">
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=600&q=80&fit=crop" alt="Gallery">
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=600&q=80&fit=crop" alt="Gallery">
+    </div>
+    <div class="gallery-item tall">
+      <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=600&q=80&fit=crop" alt="Gallery">
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?w=600&q=80&fit=crop" alt="Gallery">
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=600&q=80&fit=crop" alt="Gallery">
+    </div>
+  </div>
+</div>
+
+<!-- TESTIMONIALS -->
+<div class="testimonials">
+  <div class="section-tag">Guest Voices</div>
+  <h2 class="section-title">What Our Guests <em>Say</em></h2>
+  <div class="divider" style="margin:0 auto"></div>
+  <div class="test-grid">
+    <div class="test-card">
+      <div class="test-stars">★ ★ ★ ★ ★</div>
+      <p class="test-quote">"An evening that transcended a simple dinner. Every single course was a masterpiece — the truffle risotto alone is worth the visit."</p>
+      <div class="test-author">Priya Sharma</div>
+      <div class="test-date">Anniversary Dinner, March 2025</div>
+    </div>
+    <div class="test-card">
+      <div class="test-stars">★ ★ ★ ★ ★</div>
+      <p class="test-quote">"The private dining room was perfect for our board dinner. Impeccable service, exquisite food, and an ambiance that impressed everyone."</p>
+      <div class="test-author">Rahul Mehta</div>
+      <div class="test-date">Corporate Event, January 2025</div>
+    </div>
+    <div class="test-card">
+      <div class="test-stars">★ ★ ★ ★ ★</div>
+      <p class="test-quote">"We chose LaMaison for our wedding reception and couldn't be happier. The team went above and beyond to make our day perfect."</p>
+      <div class="test-author">Ananya &amp; Vikram</div>
+      <div class="test-date">Wedding Reception, February 2025</div>
+    </div>
+  </div>
+</div>
+
+<!-- RESERVATION -->
+<section class="reserve">
+  <div>
+    <div class="section-tag">Make a Reservation</div>
+    <h2 class="section-title">Reserve Your<br><em>Table</em> Today</h2>
+    <div class="divider"></div>
+    <p class="section-body">Whether it's an intimate dinner for two or a grand celebration, we're ready to craft an unforgettable experience tailored to you.</p>
+    <div style="display:flex;flex-direction:column;gap:0.8rem;margin-top:1rem">
+      <div style="display:flex;align-items:center;gap:1rem">
+        <div style="width:1px;height:30px;background:var(--gold);opacity:0.4"></div>
+        <div>
+          <div style="font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold)">Phone</div>
+          <div style="font-size:0.9rem;color:var(--cream)">+91 98765 43210</div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:1rem">
+        <div style="width:1px;height:30px;background:var(--gold);opacity:0.4"></div>
+        <div>
+          <div style="font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold)">Location</div>
+          <div style="font-size:0.9rem;color:var(--cream)">Connaught Place, New Delhi</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <form class="reserve-form" onsubmit="return false">
+      <div class="form-row">
+        <div class="form-group">
+          <label>First Name</label>
+          <input type="text" placeholder="Rahul">
+        </div>
+        <div class="form-group">
+          <label>Last Name</label>
+          <input type="text" placeholder="Sharma">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Date</label>
+          <input type="date">
+        </div>
+        <div class="form-group">
+          <label>Time</label>
+          <input type="time">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Guests</label>
+          <select>
+            <option>1 Person</option>
+            <option>2 Persons</option>
+            <option selected>3–4 Persons</option>
+            <option>5–6 Persons</option>
+            <option>7+ Persons</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Occasion</label>
+          <select>
+            <option>Casual Dining</option>
+            <option>Anniversary</option>
+            <option>Birthday</option>
+            <option>Business Dinner</option>
+            <option>Wedding</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Special Requests</label>
+        <input type="text" placeholder="Dietary requirements, seating preference…">
+      </div>
+      <button class="btn-primary" style="width:100%;margin-top:0.5rem;padding:1rem">Confirm Reservation</button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="nav-logo">La<span>Maison</span></span>
+      <p>A premium culinary destination in the heart of New Delhi. Crafting memorable dining experiences since 2013.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Navigate</h4>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Our Menu</a></li>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Gallery</a></li>
+        <li><a href="#">Events</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Experience</h4>
+      <ul>
+        <li><a href="#">Private Dining</a></li>
+        <li><a href="#">Wine Cellar</a></li>
+        <li><a href="#">Chef's Table</a></li>
+        <li><a href="#">Catering</a></li>
+        <li><a href="#">Gift Cards</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Connect</h4>
+      <ul>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">Facebook</a></li>
+        <li><a href="#">Zomato</a></li>
+        <li><a href="#">Google Reviews</a></li>
+        <li><a href="#">Press</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 All rights reserved <a href="https://v1xmarketing.com/">v1xmarketing</a></p>
+    <p>Privacy Policy · Terms of Use</p>
+  </div>
+</footer>
+
+</body>
+</html>
